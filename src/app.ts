@@ -1,6 +1,7 @@
-import express from 'express';
 import * as bodyParser from "body-parser";
-import { apiRouter } from "./apiRouter";
+import express from "express";
+import RateLimit from "express-rate-limit";
+import { apiRouter } from "./api-router";
 
 const app = express();
 const port = 3000;
@@ -8,17 +9,17 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.get('/', (req, res) => {
-    res.send('The sedulous hyena ate the antelope!');
-});
+const rateLimiter = new RateLimit({
+    windowMs: 5 * 60000, // 5 minutes
+    max: 1,
+  });
+app.use(rateLimiter);
 
 app.use("/v1", apiRouter);
 
-app.listen(port, err => {
+app.listen(port, (err) => {
     if (err) {
         return console.error(err);
     }
-    return console.log(`server is listening on ${port}`);
+    return console.log(`MixrElixrEmotes API is listening on ${port}`);
 });
-
-
