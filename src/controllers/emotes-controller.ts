@@ -5,7 +5,7 @@ import * as emotesAccess from "../services/emotes-access";
 
 export class EmotesController {
 
-    public async getEmotes(req: Request, res: Response) {
+    public async getAvailalbeEmotesForChannel(req: Request, res: Response) {
 
         const channelIdOrName = req.params.channelId;
 
