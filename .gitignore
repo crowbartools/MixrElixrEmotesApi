@@ -82,4 +82,6 @@ typings/
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# ts output
+dist/
 
