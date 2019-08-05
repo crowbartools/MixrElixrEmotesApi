@@ -20,21 +20,20 @@ export async function getEmotesForChannel(channelIdOrName: string): Promise<IGet
     const channelEmoteData = await crowbarAccess.getChannelEmotes(channelId);
     const globalEmoteData = await crowbarAccess.getGlobalEmotes();
 
-    console.log(channelEmoteData);
-
     const channelEmotes: IElixrEmote[] =
-        isNullOrUndefined(channelEmoteData) ?
-            [] : Object.values(channelEmoteData.emotes).map((ce) => mapCrowbarEmoteToElixrEmote(ce));
+        channelEmoteData && channelEmoteData.emotes ?
+            Object.values(channelEmoteData.emotes).map((ce) => mapCrowbarEmoteToElixrEmote(ce)) : [];
 
     const globalEmotes: IElixrEmote[] =
-        isNullOrUndefined(channelEmoteData) ?
-            [] : Object.values(globalEmoteData.emotes).map((ce) => mapCrowbarEmoteToElixrEmote(ce));
+        globalEmoteData && globalEmoteData.emotes ?
+            Object.values(globalEmoteData.emotes).map((ce) => mapCrowbarEmoteToElixrEmote(ce)) : [];
 
     const emotesResponse: IGetEmotesResponse = {
+        channelId,
         channelEmotes,
         globalEmotes,
-        channelEmoteTemplateUrl: `//crowbartools.com/user-content/emotes/live/${channelId}/{{emoteId}}`,
-        globalEmoteTemplateUrl: "//crowbartools.com/user-content/emotes/global/{{emoteId}}",
+        channelEmoteUrlTemplate: `//crowbartools.com/user-content/emotes/live/${channelId}/{{emoteId}}`,
+        globalEmoteUrlTemplate: "//crowbartools.com/user-content/emotes/global/{{emoteId}}",
     };
 
     return emotesResponse;
