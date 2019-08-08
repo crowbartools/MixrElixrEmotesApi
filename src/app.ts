@@ -14,6 +14,11 @@ app.set('trust proxy', 1);
 const rateLimiter = new RateLimit({
     windowMs: 5 * 60000, // 5 minutes
     max: 50,
+    message: {
+        error: "Too many requests",
+        message: "Too many requests, please try again later.",
+        status: 429
+    }
   });
 
 app.use(rateLimiter);
