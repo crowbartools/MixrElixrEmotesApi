@@ -1,6 +1,7 @@
 import { Router } from "express";
 import { emotesController } from "./controllers/emotes-controller";
 import swaggerUi from "swagger-ui-express";
+import swaggerDocument from "./swagger";
 
 class ApiRoutes {
     public router: Router = Router();
@@ -10,8 +11,6 @@ class ApiRoutes {
     }
 
     private config(): void {
-
-        const swaggerDocument = require('./swagger.json');
 
         this.router.use('/docs', swaggerUi.serve);
         this.router.get('/docs', swaggerUi.setup(swaggerDocument));  
