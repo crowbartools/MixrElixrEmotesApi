@@ -13,9 +13,9 @@ app.set('trust proxy', 1);
 
 const rateLimiter = new RateLimit({
     windowMs: 5 * 60000, // 5 minutes
-    max: 50,
+    max: 1,
   });
-  
+
 app.use(rateLimiter);
 
 app.use("/v1", apiRouter);
