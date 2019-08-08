@@ -9,10 +9,13 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.set('trust proxy', 1);
+
 const rateLimiter = new RateLimit({
     windowMs: 5 * 60000, // 5 minutes
     max: 50,
   });
+  
 app.use(rateLimiter);
 
 app.use("/v1", apiRouter);
