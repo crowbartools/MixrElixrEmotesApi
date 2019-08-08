@@ -15,6 +15,7 @@ export class EmotesController {
             res.status(404).json({
                 error: "Not found",
                 message: "Can't find channel.",
+                status: 404
             });
             return;
         }
