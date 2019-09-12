@@ -22,7 +22,6 @@ export default {
             "An emote code is the text that should trigger the emote.\n" +
             "* Emote codes should be case **sensitive**\n" + 
             "* Emote codes should be preceded by a whitespace character or the beginning of the string and followed by a whitespace character or end of string.\n" +
-            "* If punctuation follows directly after an emote code, do not display the emote.\n" +
             "#### Emote Rendering/Sizing\n" +
             "When rendering an emote, keep the following in mind:\n" +
             "* Emotes should render at whatever it's actual resolution is up to a **maximum** set by the \`maxSize\` property on each emote.\n" +
