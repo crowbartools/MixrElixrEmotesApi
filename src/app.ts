@@ -25,9 +25,7 @@ app.use(rateLimiter);
 
 app.use("/v1", apiRouter);
 
-app.get("/scripts/embeddedchat", function(_, res){
-    res.sendFile('resources/elixr-embedded-chat-emotes.bundle.js', { root: __dirname });
-  }); 
+app.use("/scripts/", express.static("resources/scripts"));
 
 app.listen(port, (err) => {
     if (err) {
