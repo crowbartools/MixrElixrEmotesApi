@@ -23,7 +23,7 @@ export async function getAllEmotesResponse(channelIdOrName: string, excludeGloba
         return null;
     }
 
-    let channelEmotes = await getEmotesForChannel(channelId);
+    let channelEmotes = await getEmotesForChannel(channelId) || [];
 
     let globalEmotes: IElixrEmote[] = undefined;
     if(!excludeGlobals) {
@@ -42,7 +42,7 @@ export async function getAllEmotesResponse(channelIdOrName: string, excludeGloba
 }
 
 export async function getMultiChannelEmotesResponse(channels: string[], excludeGlobals: boolean = false): Promise<IGetMultiChannelEmotesResponse> {  
-    let channelEmotes: IChannelEmotes[];
+    let channelEmotes: IChannelEmotes[] = [];
     for(let channelIdOrName of channels) {
         let channelId = await getChannelId(channelIdOrName);
 
@@ -50,7 +50,7 @@ export async function getMultiChannelEmotesResponse(channels: string[], excludeG
             return null;
         }
 
-        let emotes = await getEmotesForChannel(channelId);
+        let emotes = await getEmotesForChannel(channelId) || [];
 
         channelEmotes.push({
             channelId,
@@ -87,6 +87,8 @@ export async function getGlobalEmotesResponse(): Promise<IGetGlobalEmotesRespons
 async function getEmotesForChannel(channelId: number): Promise<IElixrEmote[]> {
 
     const channelEmoteData = await crowbarAccess.getChannelEmotes(channelId);
+
+    if(channelEmoteData == null) return null;
 
     const channelEmotes: IElixrEmote[] =
         channelEmoteData && channelEmoteData.emotes ?

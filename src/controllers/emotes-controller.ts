@@ -28,9 +28,18 @@ export class EmotesController {
     }
 
     public async getAvailableEmotesForChannels(req: Request, res: Response) {
-        const channels: string[] = req.query.channels;
+        const channelsRaw = req.query.channels;
 
-        if (isNullOrUndefined(channels)) {
+        if (isNullOrUndefined(channelsRaw)) {
+            res.status(404).json(NOT_FOUND_RESPONSE);
+            return;
+        }
+
+        let channels: string[];
+        try {
+            channels = JSON.parse(channelsRaw);
+        } catch(err) {
+            console.log(err);
             res.status(404).json(NOT_FOUND_RESPONSE);
             return;
         }
