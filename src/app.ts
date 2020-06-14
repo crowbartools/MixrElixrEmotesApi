@@ -9,7 +9,7 @@ const port = 3000;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.set('trust proxy', 1);
+app.set("trust proxy", 1);
 
 const rateLimiter = new RateLimit({
     windowMs: 5 * 60000, // 5 minutes
@@ -17,8 +17,8 @@ const rateLimiter = new RateLimit({
     message: {
         error: "Too many requests",
         message: "Too many requests, please try again later.",
-        status: 429
-    }
+        status: 429,
+    },
   });
 
 app.use(rateLimiter);

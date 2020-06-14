@@ -1,6 +1,6 @@
 import { Router } from "express";
-import { emotesController } from "./controllers/emotes-controller";
 import swaggerUi from "swagger-ui-express";
+import { emotesController } from "./controllers/emotes-controller";
 import swaggerDocument from "./swagger";
 
 class ApiRoutes {
@@ -12,9 +12,9 @@ class ApiRoutes {
 
     private config(): void {
 
-        this.router.use('/docs', swaggerUi.serve);
-        this.router.get('/docs', swaggerUi.setup(swaggerDocument));
-        
+        this.router.use("/docs", swaggerUi.serve);
+        this.router.get("/docs", swaggerUi.setup(swaggerDocument));
+
         this.router.get("/emotes", emotesController.getAvailableEmotesForChannels);
 
         this.router.get("/emotes/:channelId", emotesController.getAvailableEmotesForChannel);

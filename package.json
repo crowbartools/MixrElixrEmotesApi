@@ -1,6 +1,6 @@
 {
   "name": "elixremotesapi",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "API for MixrElixr's Custom Emotes",
   "main": "dist/app.js",
   "scripts": {
